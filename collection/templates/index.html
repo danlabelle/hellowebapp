@@ -5,8 +5,10 @@
 {% endblock title %}
 
 {% block content %}
-  <h1>Hello World!</h1>
-  <!-- Here's the variable we are going to pass in -->
-  <p>There are {{ number|apnumber }} dogs! </p>
-  <p> This is my name: {{ thing|title }} </p>
+  {% for profile in profiles %}
+    <h2><a href="{% url 'profile_detail' slug=profile.slug %}">
+      {{ profile.name }}
+    </a></h2>
+    <p>{{ profile.description }}</p>
+  {% endfor %}
 {% endblock content %}

@@ -1,3 +1,7 @@
 body {
-  background-color: cornflowerblue;
+  background-color: #ff0000;
+}
+
+p {
+    font-family: serif;
 }
