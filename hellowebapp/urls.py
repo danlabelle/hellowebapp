@@ -17,6 +17,7 @@ from django.conf.urls import patterns, url, include
 from django.contrib import admin
 from django.views.generic import TemplateView
 from collection import views
+from collection.backends import MyRegistrationView
 # tell django that we are using it's password reset/recover feature
 from django.contrib.auth.views import (
     password_reset,
@@ -26,6 +27,11 @@ from django.contrib.auth.views import (
 )
 
 urlpatterns = [
+    url(r'^accounts/register/$', MyRegistrationView.as_view(),
+        name='registration_register'),
+    url(r'^accounts/create_profile/$',
+        views.create_profile,
+        name='registration_create_profile'),
     url(r'^$', views.index, name='home'),
     url(r'^about/$',
         TemplateView.as_view(template_name='about.html'),
