@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.conf.urls import patterns, url, include
 from django.contrib import admin
-from django.views.generic import TemplateView
+from django.views.generic import TemplateView, RedirectView
 from collection import views
 from collection.backends import MyRegistrationView
 # tell django that we are using it's password reset/recover feature
@@ -45,6 +45,16 @@ urlpatterns = [
         name='profile_detail'),
     url(r'^profiles/(?P<slug>[-\w]+)/edit/$', views.edit_profile,
         name='edit_profile'),
+    # redirect flow for browse
+    url(r'^browse/$', RedirectView.as_view(
+        pattern_name='browse', permenant=True)),
+    url(r'^profiles/$', RedirectView.as_view(
+        pattern_name='browse', permenant=True)),
+    # our new browse flow
+    url(r'^browse/name/$',
+        views.browse_by_name, name='browse'),
+    url(r'^browse/name/(?P<initial>[-\w]+)/$'
+        views.browse_by_name, name='browse_by_name'),
     # the new password reset URLs
     url(r'^accounts/password/reset/$', password_reset,
         {'template_name': 'registration/password_reset_form.html'},

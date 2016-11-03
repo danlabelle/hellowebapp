@@ -71,3 +71,15 @@ def create_profile(request):
     return render(request, 'profiles/create_profile.html', {
         'form': form,
     })
+
+def browse_by_name(request, initial=None):
+    if initial:
+        profiles = Profile.objects.filter(
+            name__istartswith=initial).order_by('name')
+    else:
+        profiles = Profile.objects.all().order_by('name')
+
+    return render(request, 'search/search.html', {
+    'profiles': profiles
+    'initial': initial,
+    })
