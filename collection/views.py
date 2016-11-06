@@ -80,6 +80,6 @@ def browse_by_name(request, initial=None):
         profiles = Profile.objects.all().order_by('name')
 
     return render(request, 'search/search.html', {
-    'profiles': profiles
+    'profiles': profiles,
     'initial': initial,
     })
